@@ -33,7 +33,7 @@
 #include <iostream> /** for std::cout TO-DO REMOVE **/
 #include <vector> /** For std vector **/
 #include <boost/shared_ptr.hpp> /** For std shared pointer **/
-#include <base/Logging.hpp> /** Log message **/
+#include <base-logging/Logging.hpp> /** Log message **/
 #include <Eigen/Geometry> /** Eigen data type for Matrix, Quaternion, etc... */
 #include <Eigen/Core> /** Core methods of Eigen implementation **/
 #include <Eigen/Dense> /** for the algebra and transformation matrices and accessing Matrixblock and corner among others**/
