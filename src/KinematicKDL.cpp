@@ -39,7 +39,7 @@ KinematicKDL::KinematicKDL (const std::string &urdf_file, const std::vector<std:
     }
     xml_file.close();
 
-    boost::shared_ptr<urdf::ModelInterface> robot = urdf::parseURDF(xml_string);
+    std::shared_ptr<urdf::ModelInterface> robot = urdf::parseURDF(xml_string);
     if (!robot)
     {
         throw std::runtime_error("[KDL_MODEL] Constructor could not parse URDF model\n");
@@ -66,7 +66,7 @@ KinematicKDL::KinematicKDL (const std::string &urdf_file, const std::vector<std:
     #endif
 
     /** Get root link*/
-    boost::shared_ptr<const urdf::Link> root_link = robot->getRoot();
+    std::shared_ptr<const urdf::Link> root_link = robot->getRoot();
     if (!root_link)
         throw std::runtime_error("[KDL_MODEL] Constructor could not find Root link\n");
 
