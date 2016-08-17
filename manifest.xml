@@ -11,14 +11,8 @@
   <license> GPL v2 or later </license>
   <url>http://rock-robotics.org</url>
   <depend package="base/cmake" />
-  <!--
-   To add any dependencies use the depend tag
-  <depend package="dummy-dependency-0" />
-	...
-  <depend package="dummy-dependency-n-1" />
-  <depend package="dummy-dependency-n" />
-  -->
   <depend package="base/types" />
+  <depend package="base/logging" />
   <depend package="control/kdl_parser" />
 
   <tags>stable</tags>

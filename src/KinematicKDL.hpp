@@ -22,7 +22,7 @@
 /** Rock Base Library **/
 #include <base/Time.hpp>
 #include <base/Eigen.hpp>
-#include <base/Logging.hpp>
+#include <base-logging/Logging.hpp>
 
 #include <Eigen/Core>
 
