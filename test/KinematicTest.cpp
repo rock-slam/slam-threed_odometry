@@ -43,13 +43,6 @@ BOOST_AUTO_TEST_CASE( URDFModel)
                                         "right_passive", "fr_mimic", "fr_walking", "fr_steer", "fr_drive", "fr_contact", "fr_translation", "fr_slipx", "fr_slipy", "fr_slipz",
                                         "mr_mimic", "mr_walking", "mr_drive", "mr_contact", "mr_translation", "mr_slipx", "mr_slipy", "mr_slipz"};
 
-    std::string str_robot_joints[] = {"left_passive", "fl_mimic", "fl_walking", "fl_steer", "fl_drive", "fl_translation",
-                                        "ml_mimic", "ml_walking", "ml_drive", "ml_translation",
-                                        "rear_passive", "rl_mimic", "rl_walking", "rl_steer", "rl_drive", "rl_translation",
-                                        "rr_mimic", "rr_walking", "rr_steer", "rr_drive", "rr_translation",
-                                        "right_passive", "fr_mimic", "fr_walking", "fr_steer", "fr_drive", "fr_translation",
-                                        "mr_mimic", "mr_walking", "mr_drive", "mr_translation"};
-
     std::string str_slip_joints[] = {"fl_slipx", "fr_slipx", "ml_slipx", "mr_slipx", "rl_slipx", "rr_slipx",
                                     "fl_slipy", "fr_slipy", "ml_slipy", "mr_slipy", "rl_slipy", "rr_slipy",
                                     "fl_slipz", "fr_slipz", "ml_slipz", "mr_slipz", "rl_slipz", "rr_slipz"};
@@ -61,12 +54,12 @@ BOOST_AUTO_TEST_CASE( URDFModel)
     std::vector<std::string> contact_points( str_contact_point_segments, str_contact_point_segments + (sizeof(str_contact_point_segments)/sizeof(std::string)));
     std::vector<std::string> contact_angles( str_contact_angle_segments, str_contact_angle_segments + (sizeof(str_contact_angle_segments)/sizeof(std::string)));
     std::vector<std::string> joint_names( str_joint_names, str_joint_names + (sizeof(str_joint_names)/sizeof(std::string)));
-    std::vector<std::string> robot_joints( str_robot_joints, str_robot_joints + (sizeof(str_robot_joints)/sizeof(std::string)));
     std::vector<std::string> slip_joints( str_slip_joints, str_slip_joints + (sizeof(str_slip_joints)/sizeof(std::string)));
     std::vector<std::string> contact_joints( str_contact_joints, str_contact_joints + (sizeof(str_contact_joints)/sizeof(std::string)));
+    const int number_robot_joints = joint_names.size() - slip_joints.size() - contact_joints.size();
     std::cout<<"** [TEST] ROBOT KDL MODEL *********\n";
     std::cout<<"** [TEST] URDF FILE: "<<urdf_file<<"\n";
-    KinematicKDL robotKDL(urdf_file, contact_points, contact_angles, robot_joints.size(), slip_joints.size(), contact_joints.size());
+    KinematicKDL robotKDL(urdf_file, contact_points, contact_angles, number_robot_joints, slip_joints.size(), contact_joints.size());
     std::cout<<"** [TEST] ROBOT MODEL_DOF: "<< robotKDL.model_dof <<"\n";
 
     std::vector<double> joint_positions (robotKDL.model_dof, 0);
