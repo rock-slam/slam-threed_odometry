@@ -32,22 +32,74 @@ BOOST_AUTO_TEST_CASE( URDFModel)
     /***************************************/
 
     /** VALUES FOR EXOTER **/
-    std::string str_contact_point_segments[] = {"fl_segment_slipz", "fr_segment_slipz", "ml_segment_slipz", "mr_segment_slipz", "rl_segment_slipz", "rr_segment_slipz"};
+    std::string str_contact_point_segments[] = {"leg0_4_slip_z",
+                                                 "leg1_4_slip_z",
+                                                 "leg2_4_slip_z",
+                                                 "leg3_4_slip_z",
+                                                 "leg4_4_slip_z",
+                                                 "leg5_4_slip_z"};
 
-    std::string str_contact_angle_segments[] = {"fl_ground", "fr_ground", "ml_ground", "mr_ground", "rl_ground", "rr_ground"};
+    std::string str_contact_angle_segments[] = {"leg0_4_contact", "leg1_4_contact", "leg2_4_contact", "leg3_4_contact", "leg4_4_contact", "leg5_4_contact"};
 
-    std::string str_joint_names[] = {"left_passive", "fl_mimic", "fl_walking", "fl_steer", "fl_drive", "fl_contact", "fl_translation", "fl_slipx", "fl_slipy", "fl_slipz",
-                                        "ml_mimic", "ml_walking", "ml_drive", "ml_contact", "ml_translation", "ml_slipx", "ml_slipy", "ml_slipz",
-                                        "rear_passive", "rl_mimic", "rl_walking", "rl_steer", "rl_drive", "rl_contact", "rl_translation", "rl_slipx", "rl_slipy", "rl_slipz",
-                                        "rr_mimic", "rr_walking", "rr_steer", "rr_drive", "rr_contact", "rr_translation", "rr_slipx", "rr_slipy", "rr_slipz",
-                                        "right_passive", "fr_mimic", "fr_walking", "fr_steer", "fr_drive", "fr_contact", "fr_translation", "fr_slipx", "fr_slipy", "fr_slipz",
-                                        "mr_mimic", "mr_walking", "mr_drive", "mr_contact", "mr_translation", "mr_slipx", "mr_slipy", "mr_slipz"};
+    std::string str_joint_names[] = {
+                                "JointHead",
+                                "leg0/joint0",
+                                "leg0/joint1",
+                                "leg0/joint2",
+                                "leg0/joint3",
+                                "leg0/joint4",
+                                "leg0/joint_contact",
+                                "leg0/joint_slipz",
+                                "leg1/joint0",
+                                "leg1/joint1",
+                                "leg1/joint2",
+                                "leg1/joint3",
+                                "leg1/joint4",
+                                "leg1/joint_contact",
+                                "leg1/joint_slipz",
+                                "leg2/joint0",
+                                "leg2/joint1",
+                                "leg2/joint2",
+                                "leg2/joint3",
+                                "leg2/joint4",
+                                "leg2/joint_contact",
+                                "leg2/joint_slipz",
+                                "leg3/joint0",
+                                "leg3/joint1",
+                                "leg3/joint2",
+                                "leg3/joint3",
+                                "leg3/joint4",
+                                "leg3/joint_contact",
+                                "leg3/joint_slipz",
+                                "leg4/joint0",
+                                "leg4/joint1",
+                                "leg4/joint2",
+                                "leg4/joint3",
+                                "leg4/joint4",
+                                "leg4/joint_contact",
+                                "leg4/joint_slipz",
+                                "leg5/joint0",
+                                "leg5/joint1",
+                                "leg5/joint2",
+                                "leg5/joint3",
+                                "leg5/joint4",
+                                "leg5/joint_contact",
+                                "leg5/joint_slipz"};
 
-    std::string str_slip_joints[] = {"fl_slipx", "fr_slipx", "ml_slipx", "mr_slipx", "rl_slipx", "rr_slipx",
-                                    "fl_slipy", "fr_slipy", "ml_slipy", "mr_slipy", "rl_slipy", "rr_slipy",
-                                    "fl_slipz", "fr_slipz", "ml_slipz", "mr_slipz", "rl_slipz", "rr_slipz"};
+    std::string str_slip_joints[] = {"leg0/joint_slipz",
+                                        "leg1/joint_slipz",
+                                        "leg2/joint_slipz",
+                                        "leg3/joint_slipz",
+                                        "leg4/joint_slipz",
+                                        "leg5/joint_slipz"};
 
-    std::string str_contact_joints[] = {"fl_contact", "fr_contact", "ml_contact", "mr_contact", "rl_contact", "rr_contact"};
+    std::string str_contact_joints[] = {"leg0/joint_contact",
+                                        "leg1/joint_contact",
+                                        "leg2/joint_contact",
+                                        "leg3/joint_contact",
+                                        "leg4/joint_contact",
+                                        "leg5/joint_contact"};
+
     /*****************************************/
     /** END OF EDITABLE PART FOR PARAMETERS **/
     /*****************************************/
@@ -99,18 +151,7 @@ BOOST_AUTO_TEST_CASE( URDFModel)
 
     /***********************************************************************************************************/
 
-    /** Organized the Jacobian with the Slip and Contact Angles at the end (ONLY EXOTER) **/
-    std::string str_motion_model_joint_names[] = {"left_passive",  "right_passive", "rear_passive", "fl_mimic", "fr_mimic", "ml_mimic", "mr_mimic", "rl_mimic", "rr_mimic",
-                                    "fl_walking", "fr_walking", "ml_walking", "mr_walking", "rl_walking", "rr_walking",
-                                    "fl_steer", "fr_steer", "rl_steer", "rr_steer",
-                                    "fl_drive", "fr_drive", "ml_drive", "mr_drive","rl_drive", "rr_drive",
-                                    "fl_translation", "fr_translation","ml_translation","mr_translation","rl_translation","rr_translation",
-                                    "fl_slipx", "fr_slipx", "ml_slipx", "mr_slipx", "rl_slipx", "rr_slipx",
-                                    "fl_slipy", "fr_slipy", "ml_slipy", "mr_slipy", "rl_slipy", "rr_slipy",
-                                    "fl_slipz", "fr_slipz", "ml_slipz", "mr_slipz", "rl_slipz", "rr_slipz",
-                                    "fl_contact","fr_contact","ml_contact", "mr_contact","rl_contact","rr_contact"};
-
-    std::vector<std::string> motion_model_joint_names( str_motion_model_joint_names, str_motion_model_joint_names + (sizeof(str_motion_model_joint_names)/sizeof(std::string)));
+    std::vector<std::string> motion_model_joint_names = joint_names;
 
     Eigen::Matrix <double, Eigen::Dynamic, Eigen::Dynamic> JMotion;
     JMotion.resize(6*contact_points.size(), robotKDL.model_dof);
